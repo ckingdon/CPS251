@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">W05_Layout</string>
+
+    <string name="txtView">This is my layout project</string>
+
+    <string name="btn1">BUTTON 1</string>
+    <string name="btn2">BUTTON 2</string>
+    <string name="btn3">BUTTON 3</string>
+
+    <string name="chkbox1">Check Box 1</string>
+    <string name="chkbox2">Check Box 2</string>
+    <string name="chkbox3">Check Box 3</string>
+    <string name="chkbox4">Check Box 4</string>
+    <string name="chkbox5">Check Box 5</string>
+    <string name="chkbox6">Check Box 6</string>
+
+    <string name="imageView">smileyface.png for demo; 130dp x 130dp</string>
+
+</resources>
