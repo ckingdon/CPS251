@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">W06_TipCalculator</string>
+
+    <string name="btCalcTip">Calculate Tip</string>
+    <string name="etNumberHint">enter bill amount</string>
+    <string name="tvTipAmt">Tip amounts will display here</string>
+
+</resources>
