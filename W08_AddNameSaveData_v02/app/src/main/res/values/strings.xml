@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">W08_AddNameSaveData_v02</string>
+
+    <string name="etEnterName">enter name</string>
+    <string name="btAddName">add name</string>
+    <string name="tvDisplayNames">no names to display</string>
+    <string name="btClearNames">start again</string>
+
+</resources>
