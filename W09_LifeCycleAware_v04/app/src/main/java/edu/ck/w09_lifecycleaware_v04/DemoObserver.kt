@@ -35,7 +35,7 @@ class DemoObserver: LifecycleObserver{
         //Log.i(LOG_TAG, "onResume")
         val fName = object{}.javaClass.enclosingMethod?.name // get name of current function
         Log.i(LOG_TAG, "$fName")
-        viewModel.addMsg("$fName fired at " + Companion.getTime())
+        viewModel.addMsg("$fName fired at " + Companion.getTime() + "\n****")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
@@ -43,7 +43,7 @@ class DemoObserver: LifecycleObserver{
         //Log.i(LOG_TAG, "onPause")
         val fName = object{}.javaClass.enclosingMethod?.name // get name of current function
         Log.i(LOG_TAG, "$fName")
-        viewModel.addMsg("$fName fired at " + Companion.getTime())
+        viewModel.addMsg("$fName fired at " + Companion.getTime() + "\n****")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -75,7 +75,7 @@ class DemoObserver: LifecycleObserver{
         //Log.i(LOG_TAG, "onDestroy")
         val fName = object{}.javaClass.enclosingMethod?.name // get name of current function
         Log.i(LOG_TAG, "$fName")
-        viewModel.addMsg("$fName fired at " + Companion.getTime())
+        viewModel.addMsg("$fName fired at " + Companion.getTime() + "\n****")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_ANY)
