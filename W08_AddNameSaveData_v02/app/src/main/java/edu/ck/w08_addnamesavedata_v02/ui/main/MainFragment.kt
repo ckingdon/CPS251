@@ -6,15 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 //import androidx.lifecycle.Observer
-
 import edu.ck.w08_addnamesavedata_v02.databinding.MainFragmentBinding // view binding
-
 import androidx.databinding.DataBindingUtil
-
 import edu.ck.w08_addnamesavedata_v02.R
-
 import edu.ck.w08_addnamesavedata_v02.BR.someViewModel
 
 
@@ -37,7 +32,7 @@ class MainFragment : Fragment() {
         )
         binding.setLifecycleOwner(this)
         return binding.root
-        //return binding.getRoot() // textbook says return binding.getRoot()
+        //return binding.getRoot() // textbook uses this line .. sometimes
     }
 
     // onActivityCreated() is deprecated

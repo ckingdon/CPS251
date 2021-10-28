@@ -34,12 +34,11 @@ class MainViewModel : ViewModel() {
                 }
 
             }
-
             it.setValue(null) // reset name so that "enter name" hint appears after each name is added
-
         }
 
-        /*
+/*
+
         //old approach, adapted from last week's assignment
         if (nameList.value == null) {
             if (name.value?.isNotBlank() == true) {
@@ -49,7 +48,8 @@ class MainViewModel : ViewModel() {
             this.nameList.setValue(nameList.value + "\n" + name.value!!.trim(' ')) // need concatenation
         }
         // nameList.value = name.value + "\n" + nameList.value
-        */
+*/
+
 
         // logging
         val fName = object{}.javaClass.enclosingMethod?.name // get name of the function I'm in now

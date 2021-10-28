@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">W09_LifeCycleAware_v03</string>
+    <string name="tvEventOutput">event output</string>
+</resources>
