@@ -1,45 +1,40 @@
 package edu.ck.w09_lifecycleaware.ui.main
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import edu.ck.w09_lifecycleaware.BR
+import androidx.lifecycle.MutableLiveData
 
 class MainViewModel : ViewModel() {
 
-    companion object { // make static properties that both DemoObserver and MainFragment
-        // static = no need to make instance
-        var m = ""
-        // function here to let DemoObserver add to messageList ???
-        /*
-        fun addMessage(msg: String){
-            this.m += msg
+    // make static properties (i.e. companion object) that DemoObserver can access
+    // static = no need instantiate class before accessing companion object properties
+    companion object {
+
+        //private val TAG = "MVMstatic" // Logcat
+        private var msgStr: MutableLiveData<String> = MutableLiveData()
+        var msgStrC = ""
+
+        fun addMsg(msg: String){
+
+            // Logcat
+            //val fName = object{}.javaClass.enclosingMethod?.name // get name of the function I'm in now
+            //Log.i(TAG, "$fName messageList is " + msgStrC)
+
+            msgStrC += "\n" + msg
+            msgStr.value = msgStrC
         }
-        */
     }
 
-    private val TAG = "MainViewModel"
+    // Logcat
+    //private val TAG = "MVMinstance"
 
-    // REMOVE private to expose to MainFragmentBinding
-    var message: MutableLiveData<String> = MutableLiveData()
-    var messageList: MutableLiveData<String> = MutableLiveData()
-    // stuck with using a string rather than an ArrayList
-    //private var nameList: MutableLiveData<ArrayList<String>> = MutableLiveData()
+    // fetch static property and make it accessible as an instance property ...
+    // so that MainFragment can see it
+    fun getMsgText(): MutableLiveData<String>{
 
-    // test with dummy messageList
-    init {
-        messageList.value = "bortshoe"
+        // Logcat
+        //val fName = object{}.javaClass.enclosingMethod.name
+        //Log.i(TAG,"$fName returning " + Companion.msgStrC)
+
+        return msgStr
     }
-
-    fun addMsgToList(msg: String){
-
-        this.messageList.value += "---" + msg
-
-        // logging
-        val fName = object{}.javaClass.enclosingMethod?.name // get name of the function I'm in now
-        //Log.i(TAG,"$fName adding " + message.value + " to messageList") // filter on MainViewModel in Logcat
-        Log.i(TAG,"$fName adding " + msg + " to messageList") // filter on MainViewModel in Logcat
-        Log.i(TAG, "$fName messageList is " + messageList.value)
-    }
-
 }

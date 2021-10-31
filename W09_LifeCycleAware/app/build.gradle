@@ -7,13 +7,14 @@ plugins {
 android {
     compileSdk 31
 
-    buildFeatures{
-        viewBinding true
+    buildFeatures {
         dataBinding true
+        viewBinding true
     }
 
+
     defaultConfig {
-        applicationId "edu.ck.w09_lifecycleaware"
+        applicationId "edu.ck.w09_lifecycleaware_v03"
         minSdk 26
         targetSdk 31
         versionCode 1

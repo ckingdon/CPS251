@@ -1,23 +1,15 @@
 package edu.ck.w09_lifecycleaware.ui.main
 
-import android.accounts.AccountManager.get
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.LifecycleRegistry
-import edu.ck.w09_lifecycleaware.BR
-import edu.ck.w09_lifecycleaware.R
-//import edu.ck.w09_lifecycleaware.BR.messageView
-import edu.ck.w09_lifecycleaware.databinding.MainFragmentBinding
 import edu.ck.w09_lifecycleaware.DemoObserver
-
-import edu.ck.w09_lifecycleaware.BR.messageView // id 'kotlin-kapt' in build.gradle !!!
+import edu.ck.w09_lifecycleaware.databinding.MainFragmentBinding
 
 
 class MainFragment : Fragment() {
@@ -26,126 +18,57 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: MainViewModel // access INSTANCE properties
     lateinit var binding: MainFragmentBinding
 
-    // lifecycle stuff
-    lateinit var lifecycleRegistry: LifecycleRegistry
+    val lifecycleRegistry: LifecycleRegistry
 
-
-
+    init {
+        lifecycleRegistry = LifecycleRegistry(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View {
-        //return inflater.inflate(R.layout.main_fragment, container, false)
 
-        // if using databinding, need these two lines ...
-        /*
-        binding = DataBindingUtil.inflate(
-            inflater, R.layout.main_fragment, container, false
-        )
-        */
-        binding = DataBindingUtil.inflate(
-            inflater, R.layout.main_fragment, container, false
-        )
+        binding = MainFragmentBinding.inflate (
+            inflater, container, false )
 
-        //binding.setLifecycleOwner(this)
-        binding.lifecycleOwner = this
-
+        //binding.setLifecycleOwner(this) // not needed bc Fragments are lifecycleOwners by default
 
         return binding.root
     }
 
+    // onDestroyView() no longer needed .. from the textbook ...
+    // The binding object will only need to remain in memory for as long as the fragment is present. To ensure that the
+    // instance is destroyed when the fragment goes away, the current fragment is declared as the lifecycle owner for
+    // the binding object.
 
-    /*
-    // onActivityCreated() is deprecated
-    // replace with onViewCreated() .. below
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-    }
-    */
-
-    //lateinit var lcOwner: LCOwner // if using DemoOwner class (below)
 
     override fun onViewCreated (view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // get viewModel
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        // for databinding approach
-        binding.setVariable(messageView, viewModel)
+        // lifecycleRegistry initialized above for MainFragment class
+        // lifecycle comes from built-in getLifecycle() .. so override getLifecycle() is not needed here
+        lifecycle.addObserver(DemoObserver())
 
+        // Logcat
+        //val TAG = "MF"
+        //Log.i(TAG, "msgStr is " + viewModel.getMsgText().value.toString())
 
-        lifecycleRegistry = LifecycleRegistry(this)
-        // lifecycle comes from build-in getLifecycle()
-        lifecycle.addObserver(DemoObserver()) // now DemoObserver is watching the lifecycle
+        // create observer
+        val msgObserver = Observer<String> {
+                someText -> binding.tvEventOutput.text = someText // add toString() ???
+        }
 
+        // register observer to notice when state change happens
+        viewModel.getMsgText().observe(viewLifecycleOwner, msgObserver)
 
-
-        // START the owner
-        //fun startOwner(){
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
-        //}
-
-        //viewModel.addMsgToList()
-
-        // STOP the owner
-        //fun stopOwner(){
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
-        //}
-
-
-
-        // shouldn't need this either
-        /*
-        lcOwner = LCOwner()
-        lcOwner.startOwner()
-        lcOwner.stopOwner()
-        */
-
+        // send whatever getMsgText() returns to tvEventOutput
+        binding.tvEventOutput.text = viewModel.getMsgText().value.toString()
 
     }
 }
-
-/*
-// check if this is needed
-// shouldn't need it bc Fragments are, by default, lifecycle owners
-// but it's move intuitive this way .. i.e. to farm it out to another class
-class LCOwner: LifecycleOwner {
-    /*
-    The class needs a LifecycleRegistry instance initialized with a reference to itself,
-    and a getLifecycle() method configured to return the LifecycleRegistry instance.
-    Declare a variable to store the LifecycleRegistry reference, a constructor to
-    initialize the LifecycleRegistry instance and add the getLifecycle() method.
-    */
-    private val lifecycleRegistry: LifecycleRegistry
-
-    init {
-        lifecycleRegistry = LifecycleRegistry(this)
-        lifecycle.addObserver(DemoObserver()) // now DemoObserver is watching
-    }
-
-    /*
-   Next, the class will need to notify the registry of lifecycle state changes.
-   This can be achieved either by marking the state with the markState() method
-   of the LifecycleRegistry object, or by triggering lifecycle events using
-   the handleLifecycleEvent() method. What constitutes a state change within a
-   custom class will depend on the purpose of the class. For this example, we
-   will add some methods that simply trigger lifecycle events when called:
-   */
-    fun startOwner(){
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
-    }
-    fun stopOwner(){
-        lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
-    }
-
-
-    override fun getLifecycle(): Lifecycle {
-        return lifecycleRegistry
-    }
-
-}
-*/

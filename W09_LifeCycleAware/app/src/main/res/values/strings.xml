@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">W09_LifeCycleAware</string>
-
-    <string name="tvEventOutput">bort</string>
-
+    <string name="tvEventOutput">binding.tvEventOutput.text will go here</string>
 </resources>
