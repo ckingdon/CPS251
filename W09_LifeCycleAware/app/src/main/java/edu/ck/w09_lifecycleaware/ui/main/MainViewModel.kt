@@ -1,5 +1,6 @@
 package edu.ck.w09_lifecycleaware.ui.main
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 
@@ -9,15 +10,15 @@ class MainViewModel : ViewModel() {
     // static = no need instantiate class before accessing companion object properties
     companion object {
 
-        //private val TAG = "MVMstatic" // Logcat
+        private val TAG = "MVMstatic" // Logcat
         private var msgStr: MutableLiveData<String> = MutableLiveData()
         var msgStrC = ""
 
         fun addMsg(msg: String){
 
             // Logcat
-            //val fName = object{}.javaClass.enclosingMethod?.name // get name of the function I'm in now
-            //Log.i(TAG, "$fName messageList is " + msgStrC)
+            val fName = object{}.javaClass.enclosingMethod?.name // get name of the function I'm in now
+            Log.i(TAG, "$fName messageList is " + msgStrC)
 
             msgStrC += "\n" + msg
             msgStr.value = msgStrC
