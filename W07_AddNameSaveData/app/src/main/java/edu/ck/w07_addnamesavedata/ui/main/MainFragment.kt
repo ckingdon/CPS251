@@ -50,7 +50,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // TODO: Use the ViewModel
+        // Use the ViewModel
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         binding.tvDisplayNames.text = viewModel.getNameList().toString()
