@@ -101,6 +101,23 @@ class MainFragment: Fragment() {
                 Navigation.findNavController(it).navigate( getImgProperties(imgId))
             }
 
+            /*
+            // note from Scott:
+            You did not do anything incorrectly but this would have been shorter example for button three
+
+            binding.button3.setOnClickListener {
+                    sendTitleAndImage("Image 3", R.drawable.android_image_3, it)
+                }
+            }
+
+            fun sendTitleAndImage(imgTitle: String, imgId: Int, it: View){
+                val action: MainFragmentDirections.MainToSecond  = MainFragmentDirections.mainToSecond()
+                action.setImageTitle(imgTitle)
+                action.setImage(imgId.toString())
+                Navigation.findNavController(it).navigate(action)
+            }
+            */
+
         } // for loop
 
         /*

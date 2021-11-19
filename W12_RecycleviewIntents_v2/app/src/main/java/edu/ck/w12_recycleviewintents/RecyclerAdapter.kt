@@ -1,23 +1,25 @@
-package edu.ck.w11_recycleview
+package edu.ck.w12_recycleviewintents
 
 
+import android.app.Activity
+import android.content.Intent
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.widget.ImageView
 import android.widget.TextView
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import java.io.File
 
-// why not use lifecycle approach ...
-// https://stackoverflow.com/questions/61364874/view-models-for-recyclerview-items
-
-
-
 // pass arrays as arguments: titles, details, images
-class RecyclerAdapter (titles: Array<String>, details: Array<String>, images: Array<String>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
+class RecyclerAdapter (titles: Array<String>,
+                       details: Array<String>,
+                       images: Array<String>) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
     // declare the passed-in parameters here for local use
     private var titles = titles
@@ -38,10 +40,25 @@ class RecyclerAdapter (titles: Array<String>, details: Array<String>, images: Ar
             itemTitle = itemView.findViewById(R.id.itemTitle)
             itemDetail = itemView.findViewById(R.id.itemDetail)
 
+            /*  Scott said ...
+            Hi Everyone,
+
+            I wanted to give you this hint for setting up your intent.  The following code creates
+            the intent when a card is clicked.  The setOnClickListener is in the same spot as
+            shown in the book on the recycleview tutorial chapter.
+
+            itemView.setOnClickListener { v: View ->
+                val i = Intent(v.getContext(),MainActivity2::class.java)
+                //THERE WILL BE MORE CODE HERE
+
+                startActivity(v.context,i,null)
+
+            }*/
+
             // Responding to the card selection
             itemView.setOnClickListener { v: View  ->
                 var position: Int = getAdapterPosition() // gets the position of the item that's clicked upon
-                var chapter: String = titles[position]
+                var title: String = titles[position]
                 var detail: String = details[position]
                 var image: String = images[position]
 
@@ -51,13 +68,44 @@ class RecyclerAdapter (titles: Array<String>, details: Array<String>, images: Ar
                 this.itemImage.resources.getValue(image, imageProps, true)
                 var imageName = File(imageProps.string.toString()).nameWithoutExtension
 
-                // then show details about the item that was clicked
+                /*
+                // use Snackbar to show details about the itemView that was clicked
                 Snackbar.make(v, "You selected item at position $position. " +
-                        "\n$chapter, $detail, ${imageName}",
+                        "\n$title, $detail, ${imageName}",
                     Snackbar.LENGTH_LONG).setAction("Action", null).show()
+                */
+
+                // do Intent here .. instead of Snackbar
+                val request_code = 42
+                // val i = Intent(this, MainActivity2::class.java) // can't use "this" bc this is not an activity
+                val i = Intent(v.context, MainActivity2::class.java)
+
+                //val titleString = "hardcoded title"  // testing
+
+                val titleString = title
+                val detailsString = detail
+                val imageString = image
+
+                i.putExtra("tString", titleString)
+                i.putExtra("dString", detailsString)
+                i.putExtra("iString", imageString)
+
+                //startActivity(i) // uses all the information attached to i to start the activity
+                //startActivity(v.context, i,null)
+                startActivityForResult(v.context as Activity, i, request_code, null)
+
+                // might be better to somehow call back to MainActivity to do the INTENT there
+                // could try to send title, detail, and image so that MainActivity could set up
+                // the Intent and send along to MainActivity2
+
             }
         }
+
+      
     }
+
+
+
 
     // RecyclerView (in content_main.xml) will call this to obtain a ViewHolder object
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
