@@ -29,7 +29,7 @@ class ContactListAdapter (trashCanListener: TrashCanClickListenerInterface):
     - require this INTERFACE when constructing ContactListAdapter() [see above]
     - also need to pass this INTERFACE when creating the ViewHolder
     This is VERY circular and I need to better understand how it is wired.
-    The interface is in MainFragment.kt, but not inside class MainFragement().
+    The interface is in MainFragment.kt, but not inside class MainFragment().
     MainFragment() implements interface and then then passes it here, to ContactListAdapter().
     Track trashCanListener through this file to understand how it ends up in ViewHolder
     */
@@ -47,8 +47,8 @@ class ContactListAdapter (trashCanListener: TrashCanClickListenerInterface):
 
         contactList.let {
             contactName.text = it!![listPosition].fullName
-            contactPhone.text = it!![listPosition].phoneNumber
-            contactId.text = it!![listPosition].id.toString()
+            contactPhone.text = it[listPosition].phoneNumber
+            contactId.text = it[listPosition].id.toString()
         }
     }
 
@@ -91,7 +91,7 @@ class ContactListAdapter (trashCanListener: TrashCanClickListenerInterface):
                 the Customer's id to be passed to MainFragment.
                 */
 
-                var trashCanListener = trashCanListener // listener is passed to ViewHolder() as parameter
+                //val trashCanListener = trashCanListener // listener is passed to ViewHolder() as parameter
 
                 //val position: Int = getAdapterPosition() // get list position of the item that's been clicked
                 val position: Int = adapterPosition // get list position of the item that's been clicked
