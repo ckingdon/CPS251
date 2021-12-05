@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#81C784"
+    android:id="@+id/card_view"
+    android:layout_margin="7dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="3dp"
+    app:contentPadding="4dp">
+    <!--app:cardBackgroundColor="#666666"-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="0dp">
+
+        <TextView
+            android:id="@+id/tvHiddenContactId"
+            android:layout_width="270dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="10dp"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:layout_constraintRight_toRightOf="@+id/tvContactName"
+            app:layout_constraintEnd_toStartOf="@+id/tvContactName"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <!-- this hidden TextView is not used but leaving it in for reference -->
+
+        <TextView
+            android:id="@+id/tvContactName"
+            android:layout_width="270dp"
+            android:layout_height="22dp"
+            android:layout_gravity="start|center_vertical"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/btTrashCan"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintRight_toRightOf="@+id/btTrashCan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvContactPhone"
+            android:layout_width="270dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toStartOf="@+id/btTrashCan"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintRight_toRightOf="@+id/btTrashCan"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvContactName" />
+
+        <ImageButton
+            android:id="@+id/btTrashCan"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="0dp"
+            android:scaleType="fitCenter"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/android_trash_can_icon_7"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:contentDescription="@string/string_todo" />
+        <!--style="@style/Widget.AppCompat.Button.Borderless"-->
+        <!--android:maxHeight="70dp"-->
+        <!--android:maxWidth="70dp"-->
+        <!--android:onClick="fishbort"-->
+
+        <!--<Button
+            android:id="@+id/btTrashCan"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+
+            android:contentDescription="@string/android_drawable"
+            android:drawableStart="@drawable/android_trash_can_icon_5"
+            android:minHeight="70dp"
+            android:minWidth="70dp"
+            android:gravity="center_horizontal|top"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--<ImageView
+            android:id="@+id/itemImage"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/android_trash_can_icon_5"
+            android:contentDescription="@string/android_drawable"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

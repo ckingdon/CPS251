@@ -1,0 +1,31 @@
+#############
+Scott's note:
+#############
+
+One of the trickiest parts of this assignment is getting the garbage can
+click to work. The problem comes in when you need to have an event on
+the recycleview adapter that must pass information to the main  fragment.
+This is done using an interface and this is something I want you to work out.
+
+The posting I used to help figure it out is located here:
+
+https://stackoverflow.com/questions/52829707/how-to-pass-or-send-data-from-recyclerview-adapter-to-fragment/52830847#52830847.
+
+I suggest you get everything else working and do this part last.
+
+
+#############
+other resources I used:
+#############
+
+Communicating Back from RecyclerView Adapter to Activity or Fragment
+https://youtu.be/_rPY0s7yJ1g
+* all Java but super helpful for forcing use of INTERFACE to pass data
+* I'm still not sure why it is necessary/better to use an interface
+* need to take some time to sort out and understand how this is wired
+
+Kotlin: How to pass data from recyclerview in fragment to another fragment using viewmodel/interface?
+https://stackoverflow.com/questions/62499608/kotlin-how-to-pass-data-from-recyclerview-in-fragment-to-another-fragment-using
+* not super helpful, but got me thinking on the right track
+
+
